@@ -54,8 +54,11 @@ maze =[
 
 m = MickeyMove(maze, 1,1)
 #try to print maze by using method
-m.maze_map
-
+#m.maze_map
+for row in maze:
+    for val in row:
+        print(val,end=" ")
+    print(end="\n")    
 
 #si = 1
 #sj = 1
