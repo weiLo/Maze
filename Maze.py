@@ -31,6 +31,7 @@ class MickeyMove(object):
     
     @classmethod
     def printMaze(self):
+        print("in maze")
         for row in self.maze_map:
             for val in row:
                 print(val,end=" ")
@@ -54,7 +55,7 @@ maze =[
 
 m = MickeyMove(maze, 1,1)
 #try to print maze by using method
-#m.maze_map
+m.printMaze()
 for row in maze:
     for val in row:
         print(val,end=" ")
