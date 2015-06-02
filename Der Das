@@ -1,0 +1,86 @@
+
+from queue import *
+from array import array
+
+class MickeyMove(object):
+   
+    def __init__(self, map ,x_start, y_start,):
+        print("create mickey maze")
+        self.x_start = x_start
+        self.y_start = y_start
+        self.path = Queue(maxsize=0)
+        self.maze_map = map
+
+    @classmethod
+    def main(self):
+        maze =[
+                [2, 2, 2, 2, 2, 2, 2],
+                [2, 0, 0, 0, 0, 0, 2],
+                [2, 0, 2, 0, 2, 0, 2],
+                [2, 0, 0, 0, 0, 2, 2],
+                [2, 2, 0, 2, 0, 2, 2],
+                [2, 0, 0, 0, 0, 0, 0],
+                [2, 2, 2, 2, 2, 2, 2]]
+        m = MickeyMove(maze,1,1)
+        m.printMaze()
+        
+    @classmethod
+    def checkMove(self, x_nextPos, y_nextPos):
+        if maze[i+1][j] == 0 and maze[i-1][j] == 0 and maze[i][j+1] == 0:
+            random(3)
+            ways[0] = (i+1,j)
+            ways[1] = (i-1,j)
+            ways[2] = (i,j+1)
+            return (ways.index(max(ways)), True)
+        elif maze[i+1][j] == 2 and maze[i-1][j] == 0 and maze[i][j+1] == 0:
+            random(2)
+            ways[0] = (i-1,j)
+            ways[1] = (i,j+1)
+            return (ways.index(max(ways)), True)
+        elif maze[i+1][j] == 0 and maze[i-1][j] == 2 and maze[i][j+1] == 0:
+            random(2)
+            ways[0] = (i+1,j)
+            ways[1] = (i,j+1)
+            return (ways.index(max(ways)),True)
+        elif maze[i+1][j] == 2 and maze[i-1][j] == 0 and maze[i][j+1] == 2:
+            return ((i-1,j), True)
+        elif maze[i+1][j] == 0 and maze[i-1][j] == 2 and maze[i][j+1] == 2:
+            return ((i+1,j), True)
+        elif maze[i+1][j] == 2 and maze[i-1][j] == 2 and maze[i][j+1] == 0:
+            return ((i,j+1), True)
+        elif maze[i+1][j] == 2 and maze[i-1][j] == 2 and maze[i][j+1] == 2:            
+            return False
+        
+    @classmethod
+    def move(self, x_move, y_move):
+        if m.chechMove == True:
+            m.path.put(m.checkMove(i,j))
+            m.move(m.path.get())
+        else m.checkMove == False:
+            m.move(m.path.get())
+            m.path.popleft(m.checkMove(i,j))
+
+    @classmethod
+    def random(self,a):
+        import random
+        ways = [x for x in range(a)]
+        random.shuffle(ways)
+        return ways
+
+    @classmethod
+    def printMaze(self):
+        print("in maze")
+        self.maze_map = maze
+        for row in self.maze_map:
+            for val in row:
+                print(val,end=" ")
+            print(end="\n")
+
+    
+if __name__ == '__main__':
+    main(maze)
+#m.printMaze()
+#for i in range(0,7):
+    #for j in range(0,7):
+        #m.checkMove(i,j)
+            #m.move(i,j)
