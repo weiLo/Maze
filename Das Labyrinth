@@ -20,7 +20,7 @@ class MickeyMove():
     ''' 
     @classmethod
     def checkMove(self, x_nextPos, y_nextPos):
-         #還是想不到該怎麼去抓maze,我的想法是讓如果岔路是0他就路也表示可以走，這種情況只有三種
+         #還是想不到該怎麼去抓maze,我的想法是讓如果岔路是0他就路也表示可以走，如果可以走應該就只有這種情況只有三種...吧
          if (x_nextPos-1, y_nextPos) == 0 or (x_nextPos+1, y_nextPos) or (x_nextPos, y_nextPos+1) == 0:
             return True
          else:
