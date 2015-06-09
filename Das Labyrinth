@@ -21,6 +21,7 @@ class MickeyMove():
     @classmethod    
     def getMaze(self,val):
         self.maze_map = val
+    
     @classmethod
     def getPath(self):
         self.path = Queue(maxsize = 0)
@@ -51,7 +52,6 @@ class MickeyMove():
                 self.recStep(nexM[0],nexM[1])
             else:
                 print("\n")
-
 
     @classmethod
     def recStep(self,i,j):
