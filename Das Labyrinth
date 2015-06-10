@@ -17,6 +17,14 @@ class MickeyMove():
             return True
         else:
             return False
+    
+    @classmethod
+    def checkFork(self,x_fork,y_fork):
+        maze = self.maze_map
+        if maze[x_fork][y_fork] == 0:
+            return True
+        else:
+            return False 
         
     @classmethod    
     def getMaze(self,val):
@@ -61,6 +69,20 @@ class MickeyMove():
             forkNum = #想要在這裡放計數器讓條數增加
             fork = True
         array.append((i,j,self.checkMove(i,j),fork,forkNum))
+    
+    @classmethod
+    def choose(self,x_fork,y_fork):
+        maze = self.maze_map
+        ran = list(range(4))
+        ran[0] = (x_fork+1 , y_fork)
+        ran[1] = (x_fork-1 , y_fork)
+        ran[2] = (x_fork , y_fork+1)
+        ran[3] = (x_fork , y_fork-1)
+        nexM = self.random(ran)
+        if self.checkFork(nexM[0],nexM[1]) == True:
+            print (nexM)           
+        else:
+            return choose(x_fork,y_fork)
         
     def setMaze(self,maze):
         self.maze_map = maze
