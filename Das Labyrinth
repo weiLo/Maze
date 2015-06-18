@@ -91,6 +91,16 @@ class MickeyMove():
     def random(self,a):
         from random import choice
         return choice(a)
+    
+    @classmethod
+    def checkGoal(self,x_goal,y_goal):
+        maze = self.maze_map
+        x_Mazeboun = len(maze[0])
+        y_Mazeboun = len(maze)
+        if maze[x_goal][y_Mazeboun-1] == 0 or maze[x_goal][0] ==0 or maze[0][y_goal] == 0 or maze[x_Mazeboun-1][y_goal] == 0:
+            return True
+        else:
+            return False
         
     @classmethod
     def printMaze(self, maze_map):
