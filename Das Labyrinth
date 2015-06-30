@@ -14,30 +14,19 @@ class MickeyMove():
     def checkMove(self, x_nextPos, y_nextPos):
         maze = self.maze_map
         ch_lis = []
-        ch_1 = maze[x_nextPos+1][y_nextPos]
-        ch_2 = maze[x_nextPos-1][y_nextPos]
-        ch_3 = maze[x_nextPos][y_nextPos+1]
-        ch_4 = maze[x_nextPos][y_nextPos-1]
-        if ch_1 == 0:
-            ch_lis.append(True)
-        else:
-            ch_lis.append(False)          
-        if ch_2 == 0:
-            ch_lis.append(True)
-        else:
-            ch_lis.append(False) 
-        if ch_3 == 0:
-            ch_lis.append(True)
-        else:
-            ch_lis.append(False) 
-        if ch_4 == 0:
-            ch_lis.append(True)
-        else:
-            ch_lis.append(False) 
-        if ch_lis.count(False) >= 3:
-            return False
-        else:
-            return True
+        N = x_nextPos+1,y_nextPos
+        S = x_nextPos-1,y_nextPos
+        E = x_nextPos,y_nextPos+1
+        W = x_nextPos,y_nextPos-1
+        if maze[x_nextPos+1][y_nextPos] == 0:
+            ch_lis.append(N)
+        if maze[x_nextPos-1][y_nextPos] == 0:
+            ch_lis.append(S)
+        if maze[x_nextPos][y_nextPos+1] == 0:
+            ch_lis.append(E)
+        if maze[x_nextPos][y_nextPos-1] == 0:
+            ch_lis.append(W)
+        return ch_lis
     
     @classmethod
     def checkFork(self,x_fork,y_fork):
