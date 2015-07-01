@@ -47,30 +47,11 @@ class MickeyMove():
     @classmethod
     def move(self, x_move, y_move):
         maze = self.maze_map
-        path = self.getPath()
-        print("\n")
-        i = x_move
-        j = y_move
-        maze[i][j] = 1
-        if self.checkMove(i,j) == True:
-
-        elif self.checkMove(i,j) == False:
+        go = self.choose(x_move,y_move)
+        self.recStep(x_move,y_move)
+        #print(go)
+        self.move(go[0],go[1])
     
-    @classmethod
-    def choose(self,i,j):
-        maze = self.maze_map
-        if self.checkMove(i,j) == True:
-            ran = list(range(4))
-            ran[0] = (i+1,j)
-            ran[1] = (i-1,j)
-            ran[2] = (i,j+1)
-            ran[3] = (i,j-1)
-            nexM = self.random(ran)
-            if self.checkMove(nexM[0],nexM[1]) == True:
-                self.recStep(nexM[0],nexM[1])
-            else:
-                print("\n")
-
     @classmethod
     def recStep(self,x_recstep,y_recstep):
         array = []
