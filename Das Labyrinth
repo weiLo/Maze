@@ -72,27 +72,16 @@ class MickeyMove():
                 print("\n")
 
     @classmethod
-    def recStep(self,i,j):
-       path = self.getPath()
+    def recStep(self,x_recstep,y_recstep):
         array = []
-        if self.checkMove(i,j) == True:
-            forkNum = #想要在這裡放計數器讓條數增加
-            fork = True
-        array.append((i,j,self.checkMove(i,j),fork,forkNum))
+        array.append([(x_recstep,y_recstep),self.checkMove(x_recstep,y_recstep),self.choose(x_recstep,y_recstep)])
+        path.put(array)
     
     @classmethod
     def choose(self,x_fork,y_fork):
-        maze = self.maze_map
-        ran = list(range(4))
-        ran[0] = (x_fork+1 , y_fork)
-        ran[1] = (x_fork-1 , y_fork)
-        ran[2] = (x_fork , y_fork+1)
-        ran[3] = (x_fork , y_fork-1)
-        nexM = self.random(ran)
-        if self.checkFork(nexM[0],nexM[1]) == True:
-            print (nexM)           
-        else:
-            return choose(x_fork,y_fork)
+        ways = self.checkMove(x_fork,y_fork)
+        choosefork= self.random(ways)
+        return choosefork
         
     def setMaze(self,maze):
         self.maze_map = maze
