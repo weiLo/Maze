@@ -1,7 +1,7 @@
 from queue import *
 from array import array
-
-
+path = Queue(maxsize = 0)
+realpath = []
 class MickeyMove():
     def __init__(self, map,x_start , y_start):
         print("create mickey maze")
@@ -53,24 +53,41 @@ class MickeyMove():
         self.move(go[0],go[1])
     
     @classmethod
-    def recStep(self,x_recstep,y_recstep):
+    def recStep(self,x_recmovestep,y_recmovestep,x_recstep,y_recstep):
         array = []
-        array.append([(x_recstep,y_recstep),self.checkMove(x_recstep,y_recstep),self.choose(x_recstep,y_recstep)])
+        array.append((x_recmovestep,y_recmovestep))
+        array.append(self.checkMove(x_recmovestep,y_recmovestep))
+        array.append((x_recstep,y_recstep))
         path.put(array)
-    
+        
     @classmethod
     def choose(self,x_fork,y_fork):
         ways = self.checkMove(x_fork,y_fork)
         choosefork= self.random(ways)
-        return choosefork
+        if realpath.count(choosefork) >= 1:
+            self.choose(x_fork,y_fork)
+        else:
+            return choosefork
+    
+    @classmethod
+    def minus(self,x_hmove,y_hmove):
+        readpath = path.get()
+        allfork = readpath[1]
+        havemoved = readpath[2]
+        if len(readpath) == 2:
+            path.put(readpath)
+        else:
+            allfork.remove(havemoved)
+            path.put(readpath)
+    
         
     def setMaze(self,maze):
         self.maze_map = maze
         
     @classmethod
-    def random(self,a):
+    def random(self,list):
         from random import choice
-        return choice(a)
+        return choice(list)
     
     @classmethod
     def checkGoal(self,x_goal,y_goal):
