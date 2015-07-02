@@ -59,6 +59,11 @@ class MickeyMove():
         array.append(self.checkMove(x_recmovestep,y_recmovestep))
         array.append((x_recstep,y_recstep))
         path.put(array)
+    
+    @classmethod
+    def actStep(self,x_moved,y_moved):
+        realpath.append((x_moved,y_moved))
+        return realpath
         
     @classmethod
     def choose(self,x_fork,y_fork):
