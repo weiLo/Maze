@@ -46,19 +46,29 @@ class MickeyMove():
         
     @classmethod
     def move(self, x_move, y_move):
+        #print(x_move, y_move)
         maze = self.maze_map
         go = self.choose(x_move,y_move)
-        self.recStep(x_move,y_move)
-        #print(go)
+        print("go:",go)
+        self.recStep(x_move,y_move,go)
+        self.actStep(x_move, y_move)
+        print("\n")
         self.move(go[0],go[1])
     
     @classmethod
-    def recStep(self,x_recmovestep,y_recmovestep,x_recstep,y_recstep):
+    def recStep(self, x_recmovestep, y_recmovestep, go):
         array = []
         array.append((x_recmovestep,y_recmovestep))
         array.append(self.checkMove(x_recmovestep,y_recmovestep))
-        array.append((x_recstep,y_recstep))
-        path.put(array)
+        array.append(go)
+        allfork = array[1]
+        havemoved = array[2]
+        print("remove",havemoved)
+        if len(array) == 2:
+            path.put(array)
+        else:
+            allfork.remove(havemoved)
+            path.put(array)
     
     @classmethod
     def actStep(self,x_moved,y_moved):
@@ -74,18 +84,6 @@ class MickeyMove():
         else:
             return choosefork
     
-    @classmethod
-    def minus(self,x_hmove,y_hmove):
-        readpath = path.get()
-        allfork = readpath[1]
-        havemoved = readpath[2]
-        if len(readpath) == 2:
-            path.put(readpath)
-        else:
-            allfork.remove(havemoved)
-            path.put(readpath)
-    
-        
     def setMaze(self,maze):
         self.maze_map = maze
         
