@@ -1,6 +1,6 @@
 from queue import *
 from array import array
-path = Queue(maxsize = 0)
+path = LifoQueue(maxsize = 0)
 realpath = []
 class MickeyMove():
     def __init__(self, map,x_start , y_start):
@@ -66,27 +66,31 @@ class MickeyMove():
             back = path.get()
             lastfork = back[1]
             laststep = back[0]
+            print (back)
             if lastfork == False:
-                self.move(laststep[0],laststep[1])
+                self.move(laststep[0][0],laststep[0][1])
             else:
-                self.move(lastfork[0],lastfork[1])
+                self.move(lastfork[0][0],lastfork[0][1])
         else:
-            return 
-            
+            return
+        
     @classmethod    
     def getMaze(self,val):
         self.maze_map = val
     @classmethod
     def getPath(self):
         self.path = Queue(maxsize = 0)
+    @classmethod    
+    def getGo(self,x_move,y_move):
+        gogo = self.choose(x_move,y_move)
+        print(type(gogo))
+        return gogo
 
     @classmethod
     def move(self, x_move, y_move):
         #print(x_move, y_move)
         maze = self.maze_map
-        print(self.choose(x_move,y_move))
-        go = (self.choose(x_move,y_move))
-        print(type(go))
+        go = self.choose(x_move,y_move)
         print("2.go:",go[0],go[1])
         self.checkDeadend(go[0],go[1])
         #print("go:",go)
@@ -104,7 +108,7 @@ class MickeyMove():
         allfork = array[1]
         havemoved = array[2]
         print("array",array)
-        print("remove",havemoved)
+        #print("remove",havemoved)
         if len(array) == 2:
             path.put(array)
         else:
@@ -126,7 +130,7 @@ class MickeyMove():
         ways = self.checkMove(x_fork,y_fork)
         choosefork = self.random(ways)
         if realpath.count(choosefork) == 1:
-            self.choose(x_fork,y_fork)
+            return self.choose(x_fork,y_fork)
         else:
             print("1.chofork:",choosefork)
             return choosefork
@@ -157,7 +161,6 @@ class MickeyMove():
                 print(val,end=" ")
             print(end="\n")
 
-    
     
 def main():
     maze =[ 
