@@ -67,14 +67,14 @@ class MickeyMove():
             lastfork = back[1]
             laststep = back[0]
             print (back)
-            if lastfork == False:
-                self.move(laststep[0][0],laststep[0][1])
+            if len(back) == 2 :
+                print("1111",laststep[2][0],laststep[2][1])
+                self.move(laststep[2][0],laststep[2][1])
             else:
+                print("2222",lastfork[0][0],lastfork[0][1])
                 self.move(lastfork[0][0],lastfork[0][1])
-        else:
-            return
-        
-    @classmethod    
+
+    @classmethod
     def getMaze(self,val):
         self.maze_map = val
     @classmethod
@@ -107,7 +107,7 @@ class MickeyMove():
         array.append(go)
         allfork = array[1]
         havemoved = array[2]
-        print("array",array)
+        #print("array",array)
         #print("remove",havemoved)
         if len(array) == 2:
             path.put(array)
@@ -124,13 +124,63 @@ class MickeyMove():
         realpath.append(paath)
         print("4.real",realpath)
         return realpath
+    
+    @classmethod
+    def dunknow(self,list):
+        if len(list) == 4:
+            rego = []
+            rego.append(list[0])
+            rego.append(list[1])
+            rego.append(list[2])
+            rego.append(list[3])
+            if rego in realpath:
+                return True
+            else:
+                pass
+        else:
+            pass
+        if len(list) == 3:
+            rego = []
+            rego.append(list[0])
+            rego.append(list[1])
+            rego.append(list[2])
+            if rego in realpath:
+                return True
+            else:
+                pass
+        else:
+            pass
+        if len(list) == 2:
+            rego = []
+            rego.append(list[0])
+            rego.append(list[1])
+            if rego in realpath:
+                return True
+            else:
+                pass
+        else:
+            pass
+        if len(list) == 1:
+            rego = []
+            rego.append(list[0])
+            if rego in realpath:
+                return True
+            else:
+                pass
+        else:
+            pass
         
     @classmethod
     def choose(self,x_fork,y_fork):
         ways = self.checkMove(x_fork,y_fork)
         choosefork = self.random(ways)
-        if realpath.count(choosefork) == 1:
-            return self.choose(x_fork,y_fork)
+        if choosefork in realpath == True:
+            print("e04")
+            if self.dunknow(ways) == True:
+                self.move(realpath[-1][0],realpath[-1][1])
+            else:
+                print("!")
+                return self.choose(x_fork,y_fork)
         else:
             print("1.chofork:",choosefork)
             return choosefork
@@ -172,11 +222,13 @@ def main():
            [2, 0, 0, 0, 0, 0, 0],
            [2, 2, 2, 2, 2, 2, 2]]
 
-    m = MickeyMove(maze, 1,1)
+    m = MickeyMove(maze,1,1)
     #print(m.maze_map)
     #m.printMaze(m.maze_map)
     m.getMaze(maze)
     m.move(1,1)
+
+        
 if __name__ == "__main__":
     Si = 1
     Sj = 1
