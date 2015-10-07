@@ -67,6 +67,7 @@ class MickeyMove():
                 
                 return 'up'
     @classmethod
+                            %這邊的dictionaries output 出來會只有存到兩項，這樣我沒辦法去判斷counter要加減
     def recDirection(self,nextM,Moved):
         directionX = nextM[0]-Moved[0]
         directionY = nextM[1]-Moved[1]
